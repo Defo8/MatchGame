@@ -23,6 +23,7 @@ namespace MatchGame
     {
         DispatcherTimer timer = new DispatcherTimer();
         int tenthsOfSecondsElapsed;
+        float recordTime = 0;
         int matchesFound;
 
         public MainWindow()
@@ -47,6 +48,7 @@ namespace MatchGame
 
         private void SetUpGame()
         {
+
             foreach (TextBlock textBlock in mainGrid.Children.OfType<TextBlock>())
             {
                 if (textBlock.Name != "timeTextBlock")
@@ -71,7 +73,7 @@ namespace MatchGame
 
             foreach(TextBlock textBlock in mainGrid.Children.OfType<TextBlock>())
             {
-                if (textBlock.Name != "timeTextBlock")
+                if (textBlock.Name != "timeTextBlock" && textBlock.Name != "recordTimeTextBlock")
                 {
                     int index = random.Next(animalEmoji.Count);
                     string nextEmoji = animalEmoji[index];
@@ -80,9 +82,16 @@ namespace MatchGame
                 }
             }
 
+            if (recordTime > (tenthsOfSecondsElapsed / 10F) || recordTime == 0)
+            {
+                recordTime = tenthsOfSecondsElapsed / 10F;
+                recordTimeTextBlock.Text = "Rekord: " + recordTime.ToString("0.0s");
+            }
+
             timer.Start();
             tenthsOfSecondsElapsed = 0;
             matchesFound = 0;
+            
         }
 
         TextBlock lastTextBlockClicked;
