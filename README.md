@@ -1,2 +1,2 @@
 # MatchGame
-WPF/C# project made while reading Head First C# 5th ed
+WPF/C# game in which you have to find all pairs of matching images
